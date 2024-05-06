@@ -37,7 +37,7 @@ public class UsuarioServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		this.usuarioDao = new UsuarioDao();
-
+		
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class UsuarioServlet extends HttpServlet {
 			case "/delete":
 				eliminarUsuario(request,response);
 			case "/edit":
-				showEditFormm(request,response);
+				showEditForm(request,response);
 			case "/update":
 				actualizarUsuario(request,response);	
 			default:
@@ -97,7 +97,7 @@ public class UsuarioServlet extends HttpServlet {
 		response.sendRedirect("list");
 	}
 	
-	private void showEditFormm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Usuario usuarioActual = usuarioDao.select(id);
 		
@@ -134,8 +134,9 @@ public class UsuarioServlet extends HttpServlet {
 		request.setAttribute("listUsuarios", listUsuarios);
 		
 		RequestDispatcher dispatcher  = request.getRequestDispatcher("usuariolist.jsp");
+		dispatcher.forward(request, response);
 	}
-	
+		
 	
 	
 	

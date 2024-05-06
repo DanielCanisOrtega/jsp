@@ -13,11 +13,11 @@ public class UsuarioDao {
 	
 	private Conexion conexion;
 	
-	private static final String INSERT_USUARIO_SQL = "INSERT INTO usuario(nombre, email, pais) VALUES (?,?,?);"; 
-	private static final String DELETE_USUARIO_SQL = "DELETE FROM usuario WHERE id = ?;"; 
-	private static final String UPDATE_USUARIO_SQL = "UPDATE usuario SET nombre = ?, email = ?, pais = ? WHERE id = ?;"; 	
-	private static final String SELECT_USUARIO_BY_ID = "SELECT * FROM usuario WHERE id = ?;";
-	private static final String SELECT_ALL_USUARIOS = "SELECT * FROM usuario;"; 
+	private static final String INSERT_USUARIO_SQL = "INSERT INTO usuarios(nombre, email, pais) VALUES (?,?,?);"; 
+	private static final String DELETE_USUARIO_SQL = "DELETE FROM usuarios WHERE id = ?;"; 
+	private static final String UPDATE_USUARIO_SQL = "UPDATE usuarios SET nombre = ?, email = ?, pais = ? WHERE id = ?;"; 	
+	private static final String SELECT_USUARIO_BY_ID = "SELECT * FROM usuarios WHERE id = ?;";
+	private static final String SELECT_ALL_USUARIOS = "SELECT * FROM usuarios;"; 
 
 	public UsuarioDao() {
 		this.conexion = Conexion.getConexion();
@@ -29,7 +29,8 @@ public class UsuarioDao {
 		preparedStatement.setString(1,usuario.getNombre());
 		preparedStatement.setString(2,usuario.getEmail());
 		preparedStatement.setString(3,usuario.getPais());
-		preparedStatement.setInt(4,usuario.getId());
+		conexion.execute();
+	
 		
 			
 		} catch (SQLException e) {
@@ -42,7 +43,7 @@ public class UsuarioDao {
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement) conexion.setPreparedStatement(DELETE_USUARIO_SQL);
 			preparedStatement.setInt(1, id);
-			
+			conexion.execute();	
 		} catch (Exception e) {
 		}
 	}
@@ -53,7 +54,8 @@ public class UsuarioDao {
 			preparedStatement.setString(1, usuario.getNombre());
 			preparedStatement.setString(2, usuario.getEmail());
 			preparedStatement.setString(3, usuario.getPais());
-			preparedStatement.setString(4, usuario.getNombre());
+			preparedStatement.setInt(4, usuario.getId());
+			conexion.execute();
 			
 			
 		} catch (Exception e) {
