@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-md navbar-dark">
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
 			<div>
 				<a href="#" class="navbar-brand">Gestion de Usuarios</a>
 			</div>

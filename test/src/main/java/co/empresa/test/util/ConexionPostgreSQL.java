@@ -6,22 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Conexion {
+public class ConexionPostgreSQL {
 	
-	private static Conexion db;
+	private static ConexionPostgreSQL db;
 	private Connection con = null;	
 	private PreparedStatement preparedStatement;
 	
-	private static final String url = "jdbc:mysql://localhost:3306/";
+	private static final String url = "jdbc:postgresql://localhost:5432/";
 	private static final String dbName = "sistema";
-	private static final String driver = "com.mysql.jdbc.Driver";
-	private static final String userName = "root";
-	private static final String password = "";
+	private static final String driver = "org.postgresql.Driver";
+	private static final String userName = "postgres";
+	private static final String password = "postgres";
 	
 	
 	
 	@SuppressWarnings("deprecation")
-	public Conexion() {
+	public ConexionPostgreSQL() {
 		try {
 			Class.forName(driver).newInstance();
 			con = (Connection)DriverManager.getConnection(url+dbName,userName,password);
@@ -45,9 +45,9 @@ public class Conexion {
 		}
 	}
 	
-	public static Conexion getConexion() {
+	public static ConexionPostgreSQL getConexion() {
 		if(db == null) {
-			db = new Conexion();
+			db = new ConexionPostgreSQL();
 		}
 		return db;
 	}
@@ -71,5 +71,5 @@ public class Conexion {
 		this.preparedStatement = con.prepareStatement(sql);
 		return this.preparedStatement;
 	}
-	
+
 }
